@@ -1,17 +1,11 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
+
 [project]
-name = "py-ami-client"
-version = "0.2.1"
-description = "Python Asterisk Management Interface Client"
-readme = "README.md"
-license = { file = "LICENSE" }
-authors = [
-    { name = "hmohammad2520-org", email = "hmohammad2520@gmail.com" }
-]
-keywords = ["python", "library", "asterisk", "ami"]
+name = "py_ami_client"
+dynamic = ["version", "description", "authors", "keywords"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
@@ -21,7 +15,42 @@ dependencies = [
     "classmods==1.2.1",
 ]
 requires-python = ">=3.9"
+readme = "README.md"
+license = {file = "LICENSE"}
+
+
+[tool.setuptools.dynamic]
+version = {attr = "ami_client.__version__"}
+description = {attr = "ami_client.__description__"}
+authors = {attr = "ami_client.__authors__"}
+keywords = {attr = "ami_client.__keywords__"}
+
+
+[tool.setuptools]
+include-package-data = true
+
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ami_client*", "ami_client.*"]
+exclude = ["test*", "dev*", "scripts*"]
+
+
+[tool.setuptools.package-data]
+classmods = [
+    "README.md",
+    "LICENSE",
+]
+
+
+[tool.setuptools.exclude-package-data]
+classmods = [
+    "__pycache__/*",
+    "*.pyc",
+    "*.so"
+]
+
 
 [project.urls]
-Homepage = "https://github.com/hmohammad2520-org/py-ami-client"
-BugTracker = "https://github.com/hmohammad2520-org/py-ami-client/issues"
+Homepage = "https://github.com/devixa-tech/py-ami-client"
+BugTracker = "https://github.com/devixa-tech/py-ami-client/issues"
